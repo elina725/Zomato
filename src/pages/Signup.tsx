@@ -27,7 +27,7 @@ function Signup({ onAuth }: SignupProps) {
      }
 
    try {
-     const response = await fetch('http://localhost:8001/api/users/signup', {
+     const response = await fetch('zomato-backend-production-e74a.up.railway.app/api/users/signup', {
          method: 'POST',
          body: formData,
      });
