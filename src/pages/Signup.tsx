@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { API_URL } from '../lib/apiConfig';
 interface SignupProps {
   onAuth: (user: any, token: string) => void;
 }
 function Signup({ onAuth }: SignupProps) {
+  const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
    const [password, setPassword] = useState('');
    const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -20,6 +22,7 @@ function Signup({ onAuth }: SignupProps) {
      e.preventDefault();
 
      const formData = new FormData();
+     formData.append('name', name);
      formData.append('mobile', mobile);
      formData.append('password', password);
      if (selectedImage) {
@@ -27,7 +30,7 @@ function Signup({ onAuth }: SignupProps) {
      }
 
    try {
-     const response = await fetch('zomato-backend-production-e74a.up.railway.app/api/users/signup', {
+     const response = await fetch(`${API_URL}/users/signup`, {
          method: 'POST',
          body: formData,
      });
@@ -44,6 +47,7 @@ function Signup({ onAuth }: SignupProps) {
         alert('User signed up successfully');
 
         onAuth(ans.user, ans.token);
+        setName('');
         setMobile('');
         setPassword('');
         setSelectedImage(null);
@@ -65,8 +69,19 @@ function Signup({ onAuth }: SignupProps) {
      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
      onSubmit={loginHandler}>
       
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-       Mobile Number
+     <label className="block text-gray-700 text-sm font-bold mb-2">
+      Name
+     </label>
+     <input
+      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      type="text"
+      placeholder="Enter your name"
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+     />
+
+     <label className="block text-gray-700 text-sm font-bold mb-2 mt-4">
+      Mobile Number
       </label>
  
       <input

@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react'
+import { API_URL } from '../lib/apiConfig';
 
 function Login({ onAuth }: { onAuth: (user: any, token: string) => void }) {
   const [mobile, setMobile] = useState('');
@@ -14,7 +15,7 @@ function Login({ onAuth }: { onAuth: (user: any, token: string) => void }) {
          password,
      };
      try {
-       const response = await fetch('zomato-backend-production-e74a.up.railway.app/api/users/login', {
+       const response = await fetch(`${API_URL}/users/login`, {
            method: 'POST',
            headers: {
                'Content-Type': 'application/json',

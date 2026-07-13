@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { ArrowLeft, CreditCard, MapPin, CheckCircle2, Clock } from 'lucide-react';
+import { API_URL } from '../lib/apiConfig';
 
 interface PaymentPayload {
   key: string;
@@ -32,8 +33,6 @@ interface PaymentLocationState {
   paymentData?: OrderState;
   address?: string;
 }
-
-const API_URL = 'zomato-backend-production-e74a.up.railway.app/api';
 
 export default function Payment() {
   const { clearCart } = useApp();

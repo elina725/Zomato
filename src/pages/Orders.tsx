@@ -54,9 +54,15 @@ export default function Orders() {
         <h1 className="text-2xl font-bold text-gray-900 mb-6">Your Orders</h1>
         <div className="space-y-4">
           {orders.map((order) => {
-            const status = statusConfig[order.status];
-            const StatusIcon = status.icon;
+            const status =
+              statusConfig[order.status] || {
+                icon: Clock,
+                label: "Preparing",
+                color: "text-gray-500",
+                bgColor: "bg-gray-100",
+              };
 
+            const StatusIcon = status.icon;
             return (
               <div key={order.id} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-start justify-between mb-4">
